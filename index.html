@@ -27,10 +27,14 @@
             <div class="list-group">
                 <div class="list-group-item" v-for="(convertion, index) in convertions">
                     <span class="comment__author"> <strong>Dollar Value:</strong> {{ convertion.dollarValue }}</span>
-                    <p> <strong>Quarters:</strong> {{ convertion.quarter }}</p>
-                    <p> <strong>Dimes:</strong> {{ convertion.dime }}</p>
-                    <p> <strong>Nickels:</strong> {{ convertion.nickel }}</p>
-                    <p> <strong>Pennys:</strong> {{ convertion.penny }}</p>
+                    <br>
+                    <span> <strong>Quarters:</strong> {{ convertion.quarter }}</span>
+                    <br>
+                    <span> <strong>Dimes:</strong> {{ convertion.dime }}</span>
+                    <br>
+                    <span> <strong>Nickels:</strong> {{ convertion.nickel }}</span>
+                    <br>
+                    <span> <strong>Pennys:</strong> {{ convertion.penny }}</span>
                     <div>
                         <a href="#" title="Excluir" v-on:click.prevent="removeCovertion(index)">Excluir</a>
                     </div>
@@ -50,12 +54,12 @@
                     if (this.dollarValue.trim() === ''){
                         return;
                     }
-                    if (isNaN(this.dollarValue.trim()) || !Number.isInteger(Number(this.dollarValue.trim()))){
-                        alert('Você deve digitar um Número Inteiro!')
+                    if (isNaN(this.dollarValue.trim())){
+                        alert('Você deve digitar um Número!')
                         this.dollarValue = '';
                         return;
                     }
-                    let balance = Number(this.dollarValue)
+                    let balance = Number(this.dollarValue)*100
                     let penny, nickel, dime, quarter;
                     quarter = Math.floor(balance / 25);
                     balance = balance % 25;
@@ -65,7 +69,7 @@
                     balance = balance % 5;
                     penny = Math.floor(balance / 1);
                     this.convertions.push({
-                        dollarValue: this.dollarValue,
+                        dollarValue: Number.parseFloat(this.dollarValue),
                         quarter: quarter,
                         dime: dime,
                         nickel: nickel,
